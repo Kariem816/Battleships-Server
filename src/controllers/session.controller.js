@@ -338,11 +338,12 @@ class User {
 }
 
 const GAME_STATES = ["idle", "setup", "playing", "finished"]
+const GAME_TYPES = ["public", "private"]
 
 class Game {
     constructor(id, user, type, size) {
         if (size < 2 || size > MAX_SIZE) throw new Error("Invalid game size");
-        if (!["public", "private"].includes(type)) throw new Error("Invalid game type");
+        if (!GAME_TYPES.includes(type)) throw new Error("Invalid game type");
 
         user.joinGame(id);
 
