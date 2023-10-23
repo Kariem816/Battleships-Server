@@ -66,6 +66,11 @@ io.on('connection', (socket) => {
             sessionController.logout(socket.id)
             socket.emit("logged-out")
         } catch (err) {
+            if (err.message === "Game does not exist") {
+                sessionController.logout(socket.id)
+                socket.emit("logged-out")
+                return
+            }
             socket.emit("logout-error", err.message)
         }
     })
