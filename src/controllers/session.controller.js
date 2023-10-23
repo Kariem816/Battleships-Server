@@ -537,14 +537,14 @@ class Board {
         if (ship.rotation !== "horizontal" && ship.rotation !== "vertical") throw new Error("Invalid rotation")
         // check ship location and cells
         if (ship.rotation === "horizontal") {
-            const shipCells = Array(ship.length).fill(0).map((_, i) => locationToCell(ship.location) + i)
+            const shipCells = Array(ship.size).fill(0).map((_, i) => locationToCell(ship.location) + i)
             if (shipCells.some(cell => cell > 99 || cell < 0)) throw new Error("Ship is out of bounds")
             if (!deepCompareArrays(shipCells, ship.cells)) throw new Error("Invalid ship cells")
             const row = Math.floor(shipCells[0] / 10)
             if (shipCells.some(cell => Math.floor(cell / 10) !== row)) throw new Error("Ship is out of bounds")
             if (shipCells.some(cell => this.busyCells.includes(cell))) throw new Error("Ship overlaps with another ship")
         } else {
-            const shipCells = Array(ship.length).fill(0).map((_, i) => locationToCell(ship.location) + i * GRID_COLS)
+            const shipCells = Array(ship.size).fill(0).map((_, i) => locationToCell(ship.location) + i * GRID_COLS)
             if (shipCells.some(cell => cell > 99 || cell < 0)) throw new Error("Ship is out of bounds")
             if (!deepCompareArrays(shipCells, ship.cells)) throw new Error("Invalid ship cells")
             if (shipCells.some(cell => this.busyCells.includes(cell))) throw new Error("Ship overlaps with another ship")
